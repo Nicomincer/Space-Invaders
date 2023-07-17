@@ -8,7 +8,6 @@ preto = (0, 0, 0)
 move_to_right = False
 move_to_left = False
 shot = False
-atirar = False 
 largura = 800
 altura = 670
 
@@ -199,6 +198,25 @@ class Lifebar(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.bottomleft = (0, altura)
 
+class Shot(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        shot_image = sprite_sheet.subsurface((52, 22), (1, 6))
+        self.image = pygame.transform.scale(shot_image, (11, 20))
+        self.rect = self.image.get_rect()
+    
+    def put_shot(self, x):
+        global shot
+        if shot == True:
+            self.rect.center = (x+28, 520)
+
+    def update(self):
+        global shot
+        if self.rect.bottom > 0:
+            self.rect.y -= 25
+        else:
+            shot = False
+
 
 grupo_de_sprites = pygame.sprite.Group()
 
@@ -228,6 +246,9 @@ for x in range(1, 8):
     grupo_de_sprites.add(personagem_inimigo5)
 
 lifebar = Lifebar()
+object_shot = Shot()
+
+grupo_de_sprites.add(object_shot)
 grupo_de_sprites.add(lifebar)
 
 grupo_de_sprites.add(personagem_controlado_pelo_player)
@@ -243,7 +264,13 @@ while True:
             exit()
         elif event.type == KEYDOWN:
             if event.key == K_SPACE:
-                shot = True
+                if shot == False:
+                    shot = True
+                    object_shot.put_shot(personagem_controlado_pelo_player.rect.x)
+                else:
+                    pass 
+                
+
                 
         
 
