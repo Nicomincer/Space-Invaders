@@ -250,8 +250,15 @@ object_shot = Shot()
 
 grupo_de_sprites.add(object_shot)
 grupo_de_sprites.add(lifebar)
-
 grupo_de_sprites.add(personagem_controlado_pelo_player)
+
+grupo_de_sprites2 = pygame.sprite.Group()
+grupo_de_sprites2.add(personagem_inimigo)
+grupo_de_sprites2.add(personagem_inimigo2)
+grupo_de_sprites2.add(personagem_inimigo3)
+grupo_de_sprites2.add(personagem_inimigo4)
+grupo_de_sprites2.add(personagem_inimigo5)
+
 
 relogio = pygame.time.Clock()
 while True:
@@ -272,8 +279,9 @@ while True:
                 
 
                 
-        
-
+    colisoes = pygame.sprite.spritecollide(object_shot, grupo_de_sprites2, True)
+    if colisoes:
+        object_shot.rect.bottom = 0
 
     if pygame.key.get_pressed()[K_d]:
         move_to_right = True
