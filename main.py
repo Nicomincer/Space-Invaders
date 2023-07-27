@@ -220,6 +220,22 @@ class Shot(pygame.sprite.Sprite):
         else:
             shot = False
 
+class Shot_enemy(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        shot_image = sprite_sheet.subsurface((52, 22), (1, 6))
+        self.image = pygame.transform.scale(shot_image, (11, 20))
+        self.rect = self.image.get_rect()
+        self.rect.center = (95, 330)
+        
+
+    def update(self):
+        if self.rect.bottom <= altura:
+            self.rect.y = self.rect.y + 20
+        else:
+            self.rect.y = 330
+
+
 
 grupo_de_sprites = pygame.sprite.Group()
 grupo_de_sprites2 = pygame.sprite.Group()
@@ -344,8 +360,10 @@ grupo_de_sprites.add(personagem_controlado_pelo_player)
 
 lifebar = Lifebar()
 object_shot = Shot()
+tiro_inimigo = Shot_enemy()
 grupo_de_sprites.add(object_shot)
 grupo_de_sprites.add(lifebar)
+grupo_de_sprites.add(tiro_inimigo)
 
 
 relogio = pygame.time.Clock()
@@ -368,6 +386,10 @@ while True:
     colisoes = pygame.sprite.spritecollide(object_shot, grupo_de_sprites2, True)
     if colisoes:
         object_shot.rect.bottom = 0
+    
+    colisao2 = pygame.sprite.spritecollide(tiro_inimigo, grupo_de_sprites, False)
+    if colisao2:
+        lifebar.rect.x -= 50
 
     if pygame.key.get_pressed()[K_d]:
         move_to_right = True
