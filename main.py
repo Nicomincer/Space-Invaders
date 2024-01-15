@@ -28,8 +28,11 @@ class Enemy(pygame.sprite.Sprite):
         img2 = pygame.transform.scale(img2, (50, 50))
         img = sprite_sheet.subsurface((22, 11.7), (11, 8))
         img = pygame.transform.scale(img, (50, 50))
+        img3 = sprite_sheet.subsurface((22, 11.7), (11, 8))
+        img3 = pygame.transform.scale(img3, (50, 50))
         self.images.append(img)
         self.images.append(img2)
+        self.images.append(img3)
 
         self.index_lista = 0
         self.image = self.images[self.index_lista]
@@ -53,8 +56,11 @@ class Enemy2(pygame.sprite.Sprite):
         img = pygame.transform.scale(img, (50, 50))
         img2 = sprite_sheet.subsurface((2, 11.7), (11, 8))
         img2 = pygame.transform.scale(img2, (50, 50))
+        img3 = sprite_sheet.subsurface((2, 11.7), (11, 8))
+        img3 = pygame.transform.scale(img3, (50, 50))
         self.images.append(img)
         self.images.append(img2)
+        self.images.append(img3)
 
         self.index_lista = 0
         self.image = self.images[self.index_lista]
@@ -79,8 +85,11 @@ class Enemy3(pygame.sprite.Sprite):
         img2 = pygame.transform.scale(img2, (50, 50))
         img = sprite_sheet.subsurface((22, 11.7), (11, 8))
         img = pygame.transform.scale(img, (50, 50))
+        img3 = sprite_sheet.subsurface((22, 11.7), (11, 8))
+        img3 = pygame.transform.scale(img3, (50, 50))
         self.images.append(img)
         self.images.append(img2)
+        self.images.append(img3)
 
         self.index_lista = 0
         self.image = self.images[self.index_lista]
@@ -102,10 +111,13 @@ class Enemy4(pygame.sprite.Sprite):
         self.images = []
         img = sprite_sheet.subsurface((39, 1), (13, 8))
         img = pygame.transform.scale(img, (50, 50))
-        img2 = sprite_sheet.subsurface((44, 11.7), (11, 8))
+        img2 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
         img2 = pygame.transform.scale(img2, (50, 50))
+        img3 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
+        img3 = pygame.transform.scale(img3, (50, 50))
         self.images.append(img)
         self.images.append(img2)
+        self.images.append(img3)
 
         self.index_lista = 0
         self.image = self.images[self.index_lista]
@@ -128,11 +140,14 @@ class Enemy5(pygame.sprite.Sprite):
         self.images = []
         img = sprite_sheet.subsurface((39, 1), (13, 8))
         img = pygame.transform.scale(img, (50, 50))
-        img2 = sprite_sheet.subsurface((44, 11.7), (11, 8))
+        img2 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
         img2 = pygame.transform.scale(img2, (50, 50))
+        img3 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
+        img3 = pygame.transform.scale(img3, (50, 50))
 
         self.images.append(img)
         self.images.append(img2)
+        self.images.append(img3)
 
         self.index_lista = 0
         self.image = self.images[self.index_lista]
