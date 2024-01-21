@@ -2,11 +2,13 @@ import pygame
 from pygame.locals import *
 from sys import exit
 import os
+from random import randint 
 
 preto = (0, 0, 0)
 move_to_right = False
 move_to_left = False
 shot = False
+score = 0 
 largura = 800
 altura = 670
 
@@ -14,6 +16,8 @@ pygame.init()
 
 janela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Space Invaders")
+
+font = pygame.font.SysFont('Arial', 40)
 
 diretorio_atual = os.path.dirname(__file__)
 diretorio_das_sprites = os.path.join(diretorio_atual, "images")
@@ -25,11 +29,11 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
         img2 = sprite_sheet.subsurface((22, 1), (11, 8))
-        img2 = pygame.transform.scale(img2, (50, 50))
+        img2 = pygame.transform.scale(img2, (40, 40))
         img = sprite_sheet.subsurface((22, 11.7), (11, 8))
-        img = pygame.transform.scale(img, (50, 50))
+        img = pygame.transform.scale(img, (40, 40))
         img3 = sprite_sheet.subsurface((22, 11.7), (11, 8))
-        img3 = pygame.transform.scale(img3, (50, 50))
+        img3 = pygame.transform.scale(img3, (40, 40))
         self.images.append(img)
         self.images.append(img2)
         self.images.append(img3)
@@ -53,11 +57,11 @@ class Enemy2(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
         img = sprite_sheet.subsurface((2, 1), (11, 8))
-        img = pygame.transform.scale(img, (50, 50))
+        img = pygame.transform.scale(img, (40, 40))
         img2 = sprite_sheet.subsurface((2, 11.7), (11, 8))
-        img2 = pygame.transform.scale(img2, (50, 50))
+        img2 = pygame.transform.scale(img2,(40, 40))
         img3 = sprite_sheet.subsurface((2, 11.7), (11, 8))
-        img3 = pygame.transform.scale(img3, (50, 50))
+        img3 = pygame.transform.scale(img3, (40, 40))
         self.images.append(img)
         self.images.append(img2)
         self.images.append(img3)
@@ -82,11 +86,11 @@ class Enemy3(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
         img2 = sprite_sheet.subsurface((22, 1), (11, 8))
-        img2 = pygame.transform.scale(img2, (50, 50))
+        img2 = pygame.transform.scale(img2, (40, 40))
         img = sprite_sheet.subsurface((22, 11.7), (11, 8))
-        img = pygame.transform.scale(img, (50, 50))
+        img = pygame.transform.scale(img, (40, 40))
         img3 = sprite_sheet.subsurface((22, 11.7), (11, 8))
-        img3 = pygame.transform.scale(img3, (50, 50))
+        img3 = pygame.transform.scale(img3, (40, 40))
         self.images.append(img)
         self.images.append(img2)
         self.images.append(img3)
@@ -110,11 +114,11 @@ class Enemy4(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
         img = sprite_sheet.subsurface((39, 1), (13, 8))
-        img = pygame.transform.scale(img, (50, 50))
+        img = pygame.transform.scale(img, (40, 40))
         img2 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
-        img2 = pygame.transform.scale(img2, (50, 50))
+        img2 = pygame.transform.scale(img2, (40, 40))
         img3 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
-        img3 = pygame.transform.scale(img3, (50, 50))
+        img3 = pygame.transform.scale(img3, (40, 40))
         self.images.append(img)
         self.images.append(img2)
         self.images.append(img3)
@@ -139,11 +143,11 @@ class Enemy5(pygame.sprite.Sprite):
 
         self.images = []
         img = sprite_sheet.subsurface((39, 1), (13, 8))
-        img = pygame.transform.scale(img, (50, 50))
+        img = pygame.transform.scale(img, (40, 40))
         img2 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
-        img2 = pygame.transform.scale(img2, (50, 50))
+        img2 = pygame.transform.scale(img2, (40, 40))
         img3 = sprite_sheet.subsurface((39.8, 11.7), (13, 8))
-        img3 = pygame.transform.scale(img3, (50, 50))
+        img3 = pygame.transform.scale(img3, (40, 40))
 
         self.images.append(img)
         self.images.append(img2)
@@ -241,134 +245,42 @@ class Shot_enemy(pygame.sprite.Sprite):
         shot_image = sprite_sheet.subsurface((52, 22), (1, 6))
         self.image = pygame.transform.scale(shot_image, (11, 20))
         self.rect = self.image.get_rect()
-        self.rect.center = (95, 330)
+        self.rect.center = (randint(100, 800), randint(60, 300))
         
 
     def update(self):
         if self.rect.bottom <= altura:
             self.rect.y = self.rect.y + 20
         else:
-            self.rect.y = 330
+            self.rect.y = randint(60, 300)
+            self.rect.x = randint(100, 800)
 
 
 
 grupo_de_sprites = pygame.sprite.Group()
+grupo_protecao = pygame.sprite.Group()
 grupo_de_sprites2 = pygame.sprite.Group()
-personagem_inimigo_1_1 = Enemy(1, 120)
-personagem_inimigo_1_2 = Enemy(2, 120)
-personagem_inimigo_1_3 = Enemy(3, 120)
-personagem_inimigo_1_4 = Enemy(4, 120)
-personagem_inimigo_1_5 = Enemy(5, 120)
-personagem_inimigo_1_6 = Enemy(6, 120)
-personagem_inimigo_1_7 = Enemy(7, 120)
-
-personagem_inimigo2_1 = Enemy2(1, 50)
-personagem_inimigo2_2 = Enemy2(2, 50)
-personagem_inimigo2_3 = Enemy2(3, 50)
-personagem_inimigo2_4 = Enemy2(4, 50)
-personagem_inimigo2_5 = Enemy2(5, 50)
-personagem_inimigo2_6 = Enemy2(6, 50)
-personagem_inimigo2_7 = Enemy2(7, 50)
-
-personagem_inimigo3_1 = Enemy3(1, 180)
-personagem_inimigo3_2 = Enemy3(2, 180)
-personagem_inimigo3_3 = Enemy3(3, 180)
-personagem_inimigo3_4 = Enemy3(4, 180)
-personagem_inimigo3_5 = Enemy3(5, 180)
-personagem_inimigo3_6 = Enemy3(6, 180)
-personagem_inimigo3_7 = Enemy3(7, 180)
-
-personagem_inimigo4_1 = Enemy4(1, 240)
-personagem_inimigo4_2 = Enemy4(2, 240)
-personagem_inimigo4_3 = Enemy4(3, 240)
-personagem_inimigo4_4 = Enemy4(4, 240)
-personagem_inimigo4_5 = Enemy4(5, 240)
-personagem_inimigo4_6 = Enemy4(6, 240)
-personagem_inimigo4_7 = Enemy4(7, 240)
-
-personagem_inimigo5_1 = Enemy5(1, 300)
-personagem_inimigo5_2 = Enemy5(2, 300)
-personagem_inimigo5_3 = Enemy5(3, 300)
-personagem_inimigo5_4 = Enemy5(4, 300)
-personagem_inimigo5_5 = Enemy5(5, 300)
-personagem_inimigo5_6 = Enemy5(6, 300)
-personagem_inimigo5_7 = Enemy5(7, 300)
-
-grupo_de_sprites.add(personagem_inimigo_1_1)
-grupo_de_sprites.add(personagem_inimigo_1_2)
-grupo_de_sprites.add(personagem_inimigo_1_3)
-grupo_de_sprites.add(personagem_inimigo_1_4)
-grupo_de_sprites.add(personagem_inimigo_1_5)
-grupo_de_sprites.add(personagem_inimigo_1_6)
-grupo_de_sprites.add(personagem_inimigo_1_7)
-grupo_de_sprites.add(personagem_inimigo2_1)
-grupo_de_sprites.add(personagem_inimigo2_2)
-grupo_de_sprites.add(personagem_inimigo2_3)
-grupo_de_sprites.add(personagem_inimigo2_4)
-grupo_de_sprites.add(personagem_inimigo2_5)
-grupo_de_sprites.add(personagem_inimigo2_6)
-grupo_de_sprites.add(personagem_inimigo2_7)
-grupo_de_sprites.add(personagem_inimigo3_1)
-grupo_de_sprites.add(personagem_inimigo3_2)
-grupo_de_sprites.add(personagem_inimigo3_3)
-grupo_de_sprites.add(personagem_inimigo3_4)
-grupo_de_sprites.add(personagem_inimigo3_5)
-grupo_de_sprites.add(personagem_inimigo3_6)
-grupo_de_sprites.add(personagem_inimigo3_7)
-grupo_de_sprites.add(personagem_inimigo4_1)
-grupo_de_sprites.add(personagem_inimigo4_2)
-grupo_de_sprites.add(personagem_inimigo4_3)
-grupo_de_sprites.add(personagem_inimigo4_4)
-grupo_de_sprites.add(personagem_inimigo4_5)
-grupo_de_sprites.add(personagem_inimigo4_6)
-grupo_de_sprites.add(personagem_inimigo4_7)
-grupo_de_sprites.add(personagem_inimigo5_1)
-grupo_de_sprites.add(personagem_inimigo5_2)
-grupo_de_sprites.add(personagem_inimigo5_3)
-grupo_de_sprites.add(personagem_inimigo5_4)
-grupo_de_sprites.add(personagem_inimigo5_5)
-grupo_de_sprites.add(personagem_inimigo5_6)
-grupo_de_sprites.add(personagem_inimigo5_7)
-
-grupo_de_sprites2.add(personagem_inimigo_1_1)
-grupo_de_sprites2.add(personagem_inimigo_1_2)
-grupo_de_sprites2.add(personagem_inimigo_1_3)
-grupo_de_sprites2.add(personagem_inimigo_1_4)
-grupo_de_sprites2.add(personagem_inimigo_1_5)
-grupo_de_sprites2.add(personagem_inimigo_1_6)
-grupo_de_sprites2.add(personagem_inimigo_1_7)
-grupo_de_sprites2.add(personagem_inimigo2_1)
-grupo_de_sprites2.add(personagem_inimigo2_2)
-grupo_de_sprites2.add(personagem_inimigo2_3)
-grupo_de_sprites2.add(personagem_inimigo2_4)
-grupo_de_sprites2.add(personagem_inimigo2_5)
-grupo_de_sprites2.add(personagem_inimigo2_6)
-grupo_de_sprites2.add(personagem_inimigo2_7)
-grupo_de_sprites2.add(personagem_inimigo3_1)
-grupo_de_sprites2.add(personagem_inimigo3_2)
-grupo_de_sprites2.add(personagem_inimigo3_3)
-grupo_de_sprites2.add(personagem_inimigo3_4)
-grupo_de_sprites2.add(personagem_inimigo3_5)
-grupo_de_sprites2.add(personagem_inimigo3_6)
-grupo_de_sprites2.add(personagem_inimigo3_7)
-grupo_de_sprites2.add(personagem_inimigo4_1)
-grupo_de_sprites2.add(personagem_inimigo4_2)
-grupo_de_sprites2.add(personagem_inimigo4_3)
-grupo_de_sprites2.add(personagem_inimigo4_4)
-grupo_de_sprites2.add(personagem_inimigo4_5)
-grupo_de_sprites2.add(personagem_inimigo4_6)
-grupo_de_sprites2.add(personagem_inimigo4_7)
-grupo_de_sprites2.add(personagem_inimigo5_1)
-grupo_de_sprites2.add(personagem_inimigo5_2)
-grupo_de_sprites2.add(personagem_inimigo5_3)
-grupo_de_sprites2.add(personagem_inimigo5_4)
-grupo_de_sprites2.add(personagem_inimigo5_5)
-grupo_de_sprites2.add(personagem_inimigo5_6)
-grupo_de_sprites2.add(personagem_inimigo5_7)
+for i in range(120, 301, 60):
+    for c in range(1, 8):
+        if i == 120:
+            personagem_inimigo = Enemy(c, i)
+            grupo_de_sprites2.add(personagem_inimigo)
+        if i == 180:
+            personagem_inimigo = Enemy2(c, i)
+            grupo_de_sprites2.add(personagem_inimigo)
+        if i == 240:
+            personagem_inimigo = Enemy3(c, i)
+            grupo_de_sprites2.add(personagem_inimigo)
+        if i == 300:
+            personagem_inimigo = Enemy4(c, i)
+            grupo_de_sprites2.add(personagem_inimigo)
+        if i == 360:
+            personagem_inimigo = Enemy5(c, i)
+            grupo_de_sprites2.add(personagem_inimigo)
 
 for posicao2 in range(1, 4):
     protection = Barreira(posicao2)
-    grupo_de_sprites.add(protection)
+    grupo_protecao.add(protection)
 
 personagem_controlado_pelo_player = Personagem()
 grupo_de_sprites.add(personagem_controlado_pelo_player)
@@ -383,9 +295,12 @@ grupo_unitario = pygame.sprite.Group()
 grupo_unitario.add(personagem_controlado_pelo_player)
 
 relogio = pygame.time.Clock()
+
+
 while True:
     relogio.tick(30)
     janela.fill(preto)
+    mensagem = f"Score: {score}"
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -402,18 +317,34 @@ while True:
     colisoes = pygame.sprite.spritecollide(object_shot, grupo_de_sprites2, True)
     if colisoes:
         object_shot.rect.bottom = 0
+        score += 50 
     
     colisao2 = pygame.sprite.spritecollide(tiro_inimigo, grupo_unitario, False)
     if colisao2:
         lifebar.rect.x -= 50
-        tiro_inimigo.rect.y = 330
+        tiro_inimigo.rect.y = randint(60, 300)
+        tiro_inimigo.rect.x = randint(100, 800)
+    
+    colisao3 = pygame.sprite.spritecollide(tiro_inimigo, grupo_protecao, False)
+    if colisao3:
+        tiro_inimigo.rect.y = randint(60, 300)
+        tiro_inimigo.rect.x = randint(100, 800)
+    
+    colisao4 = pygame.sprite.spritecollide(object_shot, grupo_protecao, False)
+    if colisao4:
+        object_shot.rect.bottom = 0
 
     if pygame.key.get_pressed()[K_d]:
         move_to_right = True
     elif pygame.key.get_pressed()[K_a]:
         move_to_left = True
+    
+    render = font.render(mensagem, False, (255, 255, 255))
 
+    grupo_de_sprites2.draw(janela)
+    grupo_protecao.draw(janela)
     grupo_de_sprites.draw(janela)
     grupo_de_sprites.update()
 
+    janela.blit(render, (320, 0))
     pygame.display.flip()
